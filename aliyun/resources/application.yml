@@ -1,0 +1,11 @@
+
+
+server:
+    port: 2001
+    
+aliyun:
+    accessId: 
+    accessKey: 
+    mnsEndpoint: https://34325862.mns.cn-beijing.aliyuncs.com/
+    
+    
