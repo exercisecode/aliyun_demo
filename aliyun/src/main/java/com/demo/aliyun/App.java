@@ -4,7 +4,6 @@ package com.demo.aliyun;
  * Hello world!
  *
  */
-public class App 
-{
+public class App {
 
 }

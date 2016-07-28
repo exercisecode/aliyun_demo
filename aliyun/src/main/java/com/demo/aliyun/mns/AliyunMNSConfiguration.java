@@ -9,24 +9,24 @@ import com.aliyun.mns.client.MNSClient;
 
 @Configuration
 public class AliyunMNSConfiguration {
-	
+
 	@Value("${aliyun.accessId}")
 	private String aliyunAccessId;
-	
+
 	@Value("${aliyun.accessKey}")
 	private String aliyunAccessKey;
-	
+
 	@Value("${aliyun.mnsEndpoint}")
 	private String aliyunMNSEndpoint;
-	
+
 	@Bean
-	public CloudAccount aliyunCloudAccount(){
+	public CloudAccount aliyunCloudAccount() {
 		CloudAccount aliyunCloudAccount = new CloudAccount(aliyunAccessId, aliyunAccessKey, aliyunMNSEndpoint);
 		return aliyunCloudAccount;
 	}
-	
+
 	@Bean
-	public MNSClient aliyunMNSClient(){
+	public MNSClient aliyunMNSClient() {
 		MNSClient aliyunMNSClient = aliyunCloudAccount().getMNSClient();
 		return aliyunMNSClient;
 	}
