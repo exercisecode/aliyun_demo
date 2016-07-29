@@ -18,19 +18,25 @@ public class AliyunMNSQueueService {
 	@Autowired
 	private MNSClient mnsClient;
 
-	public void createQueue(String queueName) {
+	public CloudQueue createQueue(String queueName) {
+		CloudQueue cloudQueue = null;
 		try {
 			QueueMeta queueMeta = new QueueMeta();
 			queueMeta.setQueueName(queueName);
-			queueMeta.setPollingWaitSeconds(15);
+			queueMeta.setPollingWaitSeconds(0);
 			queueMeta.setMaxMessageSize(1024 * 10L);
 
-			CloudQueue queue = mnsClient.createQueue(queueMeta);
-			log.info("-----createQuery name:{} CloudQuery:{} ", queueName, queue);
+			cloudQueue = mnsClient.createQueue(queueMeta);
+			if (cloudQueue != null) {
+				log.info("-----createQueue queueName:{} success. CloudQuery:{} ", queueName, cloudQueue);
+			} else {
+				log.warn("-----createQueue queueName:{} fail. ", queueName);
+			}
 
 		} catch (Exception e) {
 			MNSExceptionHandler.deal(e);
 		}
+		return cloudQueue;
 
 	}
 
