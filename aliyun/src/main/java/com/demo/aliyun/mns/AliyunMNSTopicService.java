@@ -28,7 +28,7 @@ public class AliyunMNSTopicService {
 
 			cloudTopic = mnsClient.createTopic(topicMeta);
 			if (cloudTopic != null) {
-				log.info("-----createTopic topicName:{} success. ", topicName);
+				//log.info("-----createTopic topicName:{} success. ", topicName);
 
 			} else {
 				log.warn("-----createTopic topicName:{} fail. ", topicName);
@@ -68,7 +68,7 @@ public class AliyunMNSTopicService {
 				subscriptionMeta.setNotifyContentFormat(SubscriptionMeta.NotifyContentFormat.SIMPLIFIED);
 
 				subscriptionUrl = cloudTopic.subscribe(subscriptionMeta);
-				log.info("-----subscribeTopic subscriptionUrl:{} ", subscriptionUrl);
+				//log.info("-----subscribeTopic subscriptionUrl:{} ", subscriptionUrl);
 
 			} else {
 				log.warn("-----subscribeTopic topicName:{} not exists. ", topicName);
@@ -80,20 +80,22 @@ public class AliyunMNSTopicService {
 		return subscriptionUrl;
 	}
 
-	public void sendTopicMessage(String topicName, String message) {
+	public TopicMessage sendTopicMessage(String topicName, String message) {
+		TopicMessage sendMessage = null;
 		try {
 			CloudTopic cloudTopic = mnsClient.getTopicRef(topicName);
 			if (cloudTopic != null) {
 				TopicMessage topicMessage = new Base64TopicMessage();
 				topicMessage.setMessageBody(message);
-				TopicMessage sendMessage = cloudTopic.publishMessage(topicMessage);
-				log.info("-----sendTopicMessage topicName:{} afterSendMessage:{} ", topicName, sendMessage);
+				sendMessage = cloudTopic.publishMessage(topicMessage);
+				//log.info("-----sendTopicMessage topicName:{} afterSendMessage:{} ", topicName, sendMessage);
 			} else {
 				log.warn("-----sendTopicMessage topicName:{} not exists. ", topicName);
 			}
 		} catch (Exception e) {
 			MNSExceptionHandler.deal(e);
 		}
+		return sendMessage;
 	}
 
 	public void unsubscribeTopic(String topicName, String subscriptionName) {
@@ -101,7 +103,7 @@ public class AliyunMNSTopicService {
 			CloudTopic cloudTopic = mnsClient.getTopicRef(topicName);
 			if (cloudTopic != null) {
 				cloudTopic.unsubscribe(subscriptionName);
-				log.info("-----unsubscribeTopic topicName:{} success. ", topicName);
+				//log.info("-----unsubscribeTopic topicName:{} success. ", topicName);
 			} else {
 				log.warn("-----unsubscribeTopic topicName:{} not exists. ", topicName);
 			}
@@ -116,7 +118,7 @@ public class AliyunMNSTopicService {
 
 			if (cloudTopic != null) {
 				cloudTopic.delete();
-				log.info("-----deleteTopic topicName:{} success. ", topicName);
+				//log.info("-----deleteTopic topicName:{} success. ", topicName);
 			} else {
 				log.warn("-----deleteTopic topicName:{} not exists. ", topicName);
 			}
