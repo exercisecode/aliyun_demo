@@ -11,6 +11,22 @@
 - [ONS Java SDK mvnrepository](http://mvnrepository.com/artifact/com.aliyun.openservices/ons-client)  
 
 
+# ONS 基础概念  
+
+[申请MQ资源](https://help.aliyun.com/document_detail/29536.html)  
+
+
+消息主题(Topic)是MQ里对消息进行的一级分类.  
+
+创建好Topic后, 要为这个Topic申请消息生产端的资源, 既创建ProducerID. 一个Topic只能对应一个Producer ID.  
+Producer ID和Topic的关系是 1:N , 既一个Topic只能绑定一个Producer ID, 同一个Producer ID可以对应多个Topic.  
+
+创建好生效消息关系后, 需要为Topic申请相应的消息消费资源, 既创建Consumer ID.  
+Consumer ID和Topic的关系是 N:N. 同一个Consumer ID可以订阅多个Topic, 同一个Topic也可以对应多个Consumer ID.  
+
+
+
+
 
 # Java工程配置  
 
@@ -57,6 +73,11 @@ https://help.aliyun.com/document_detail/35186.html
 
 
 ```  
+
+## OPEN API接入  
+
+https://help.aliyun.com/document_detail/29587.html  
+
 
 
 
